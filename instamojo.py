@@ -45,7 +45,7 @@ class API():
     def api_request(self, method, path, **kwargs):
         headers = {'X-App-Id': self.appid}
         if self.token:
-            headers.update({'X-Token-Auth':self.token})
+            headers.update({'X-Auth-Token':self.token})
 
         api_path = self.endpoint + path
 
