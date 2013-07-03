@@ -4,7 +4,7 @@
 
 Usage:
     instamojo.py debug
-    instamojo.py auth <username> <password>
+    instamojo.py auth <username>
     instamojo.py auth delete
     instamojo.py offer
     instamojo.py offer create [options]
@@ -32,19 +32,21 @@ import os
 import json
 import logging
 import requests
+import getpass
 
 from docopt import docopt
 
 
 class API():
     endpoint = 'https://staging.instamojo.com/api/1/'
+    #endpoint = 'http://local.instamojo.com:5000/api/1/'
     appid = os.getenv('INSTAMOJO_APP_ID', 'test')
     token = None
 
     def __init__(self, token=None):
         self.token = token
 
-    def save_token_to_file(self, filename='instamojoauth.json'):
+    def save_token_to_file(self, filename='auth.json'):
         try:
             json.dump(self.token, open(filename, 'w+'))
             return True
@@ -53,14 +55,14 @@ class API():
             logging.error(message)
             raise Exception(message)
 
-    def load_token_from_file(self, filename='instamojoauth.json'):
+    def load_token_from_file(self, filename='auth.json'):
         try:
             self.token = json.load(open(filename, 'r+'))
             return True
         except IOError:
             message = 'Unable to open file for loading token: %s' % filename
             logging.error(message)
-            raise Exception(message)
+            #raise Exception(message)
 
     def api_request(self, method, path, **kwargs):
         headers = {'X-App-Id': self.appid}
@@ -173,7 +175,8 @@ if __name__ == '__main__':
         print api.delete_auth_token()
 
     elif args['auth']:
-        print api.auth(args['<username>'], args['<password>'])
+        password = getpass.getpass()
+        print api.auth(args['<username>'], password)
         api.save_token_to_file()
 
     elif args['debug']:
