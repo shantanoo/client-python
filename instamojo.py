@@ -5,7 +5,7 @@
 Usage:
     instamojo.py debug
     instamojo.py auth <username>
-    instamojo.py auth delete
+    instamojo.py auth --delete
     instamojo.py offer
     instamojo.py offer create [options]
     instamojo.py offer geturl
@@ -38,8 +38,7 @@ from docopt import docopt
 
 
 class API():
-    endpoint = 'https://staging.instamojo.com/api/1/'
-    #endpoint = 'http://local.instamojo.com:5000/api/1/'
+    endpoint = 'https://www.instamojo.com/api/1/'
     appid = os.getenv('INSTAMOJO_APP_ID', 'test')
     token = None
 
@@ -171,7 +170,7 @@ if __name__ == '__main__':
     if api.load_token_from_file():
         print 'API token loaded from file.'
 
-    if args['auth'] and args['delete']:
+    if args['auth'] and args['--delete']:
         print api.delete_auth_token()
 
     elif args['auth']:
