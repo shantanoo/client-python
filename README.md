@@ -49,7 +49,7 @@ can share the URL for the offer wherever you wish.
 
 ### Listing a specific Offer:
 
-    $ python instamojo.py offer <slug>
+    $ python instamojo.py offer --slug=<slug>
 
 Instamojo recognizes offers by their unique slugs (string that identifies the Offer in urls), you can pass slugs of any of the offers you have created to get more information.
 
