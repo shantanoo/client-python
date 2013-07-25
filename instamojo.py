@@ -26,7 +26,9 @@ Options:
     --note=<note>
     --file-upload-json=<file-upload-json>
     --cover-image-json=<cover-image-json>
-    --file==<file>
+    --file=<file>
+    --cover=<cover-image>
+
 """
 import os
 import json
@@ -42,7 +44,7 @@ class API():
     This is an example client API, kept to bare minimum - including error checking
     to help understand how the API works.
     """
-    endpoint = 'https://www.instamojo.com/api/1/'
+    endpoint = os.getenv('INSTAMOJO_ENDPOINT', 'https://www.instamojo.com/api/1/')
     # Set your APP-ID in environment variables or replace 'test'
     appid = os.getenv('INSTAMOJO_APP_ID', 'test')
     token = None
@@ -253,7 +255,7 @@ if __name__ == '__main__':
             file_upload_url = api.get_file_upload_url()
             if file_upload_url.get('success',False):
                 file_upload_url = file_upload_url['upload_url']
-                logging.info('Got file upload URL: %s' file_upload_url['upload_url'])
+                logging.info('Got file upload URL: %s' % file_upload_url)
             else:
                 raise Exception('Unable to get file upload url from API. Got this instead: %s' % file_upload_url)
 
@@ -263,7 +265,25 @@ if __name__ == '__main__':
             # inject the json data into formdata
             formdata['file_upload_json'] = file_upload_json
 
+        if args['--cover']:
+            # we first need to upload the file, get the json
+            # and put it in formdata.file_upload_json
+            cover_upload_url = api.get_file_upload_url()
+            if cover_upload_url.get('success',False):
+                cover_upload_url = cover_upload_url['upload_url']
+                logging.info('Got cover image upload URL: %s' % cover_upload_url)
+            else:
+                raise Exception('Unable to get cover image upload url from API. Got this instead: %s' % cover_upload_url)
+
+            cover_image_json = api.upload_file(cover_upload_url, args['--cover'])
+            print cover_image_json
+
+            # inject the json data into formdata
+            formdata['cover_image_json'] = cover_image_json
+
+
         # finally, create the offer
+        print formdata
         print api.offer_create(**formdata)
 
     elif args['offer'] and args['geturl']:
@@ -277,4 +297,3 @@ if __name__ == '__main__':
 
     elif args['offer']:
         print api.offer_list()
-
