@@ -15,11 +15,11 @@ Usage:
 Options:
     --title=<title>
     --description=<description>
-    --inr=<inr>
-    --usd=<usd>
+    --currency=<currency>
+    --price=<price>
     --quantity=<quantity>
     --start-date=<start-date>
-    --end-date<end-date>
+    --end-date=<end-date>
     --venue=<venue>
     --timezone=<timezone>
     --redirect-url=<redirect-url>
@@ -209,8 +209,8 @@ if __name__ == '__main__':
     # Map the commandline friendly names to actual parameter-names
     options = {'title':'title',
                 'description':'description',
-                'inr':'base_inr',
-                'usd':'base_usd',
+                'currency':'currency',
+                'price':'base_price',
                 'quantity':'quantity',
                 'start-date':'start_date',
                 'end-date':'end_date',

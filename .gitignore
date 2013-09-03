@@ -36,3 +36,5 @@ nosetests.xml
 .idea/client-python.iml
 auth.json
 debug.log
+
+venv
