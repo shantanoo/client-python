@@ -37,7 +37,7 @@ You can discard/delete the token by issuing:
     $ python instamojo.py offer create \
       --title="My First Comic" \
       --description="Adventures of a digital nomad." \
-      --file=digital_nomad.zip
+      --file=digital_nomad.zip \
       --currency="INR" \
       --base_price=50
 
