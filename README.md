@@ -38,7 +38,8 @@ You can discard/delete the token by issuing:
       --title="My First Comic" \
       --description="Adventures of a digital nomad." \
       --file=digital_nomad.zip
-      --inr=50
+      --currency="INR" \
+      --base_price=50
 
 This will create an offer that will be priced for ₹50. You 
 can share the URL for the offer wherever you wish.
