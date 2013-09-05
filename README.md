@@ -39,7 +39,7 @@ You can discard/delete the token by issuing:
       --description="Adventures of a digital nomad." \
       --file=digital_nomad.zip \
       --currency="INR" \
-      --base_price=50
+      --price=50
 
 This will create an offer that will be priced for ₹50. You 
 can share the URL for the offer wherever you wish.
