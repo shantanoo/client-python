@@ -101,6 +101,7 @@ class API():
         else:
             raise Exception('Unable to make a API call for "%s" method.' % method)
 
+        kwargs['password'] = '***'
         logging.debug('api path: %s' % api_path)
         logging.debug('parameters: %s' % kwargs)
         logging.debug('headers: %s' % headers)
