@@ -16,7 +16,7 @@ Options:
     --title=<title>
     --description=<description>
     --currency=<currency>
-    --price=<price>
+    --base_price=<price>
     --quantity=<quantity>
     --start-date=<start-date>
     --end-date=<end-date>
@@ -210,7 +210,7 @@ if __name__ == '__main__':
     options = {'title':'title',
                 'description':'description',
                 'currency':'currency',
-                'price':'base_price',
+                'base_price':'base_price',
                 'quantity':'quantity',
                 'start-date':'start_date',
                 'end-date':'end_date',
