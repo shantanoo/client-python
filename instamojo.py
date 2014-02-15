@@ -226,7 +226,7 @@ if __name__ == '__main__':
 
     # build the dictionary for data
     for option in options:
-        if args.has_key('--%s' % option):
+        if '--%s' % option in args:
             formdata.update({options[option]: args['--%s' % option]})
 
     # Create an instance of the example API
@@ -239,15 +239,15 @@ if __name__ == '__main__':
     # here onwards, we look at what arguments are passed to us,
     # and call the appropriate API methods.
     if args['auth'] and args['--delete']:
-        print api.delete_auth_token()
+        print(api.delete_auth_token())
 
     elif args['auth']:
         password = getpass.getpass()
-        print api.auth(args['<username>'], password)
+        print(api.auth(args['<username>'], password))
         api.save_token_to_file()
 
     elif args['debug']:
-        print api.debug()
+        print(api.debug())
 
     elif args['offer'] and args['create']:
         if args['--file']:
@@ -261,7 +261,7 @@ if __name__ == '__main__':
                 raise Exception('Unable to get file upload url from API. Got this instead: %s' % file_upload_url)
 
             file_upload_json = api.upload_file(file_upload_url, args['--file'])
-            print file_upload_json
+            print(file_upload_json)
 
             # inject the json data into formdata
             formdata['file_upload_json'] = file_upload_json
@@ -277,24 +277,24 @@ if __name__ == '__main__':
                 raise Exception('Unable to get cover image upload url from API. Got this instead: %s' % cover_upload_url)
 
             cover_image_json = api.upload_file(cover_upload_url, args['--cover'])
-            print cover_image_json
+            print(cover_image_json)
 
             # inject the json data into formdata
             formdata['cover_image_json'] = cover_image_json
 
 
         # finally, create the offer
-        print formdata
-        print api.offer_create(**formdata)
+        print(formdata)
+        print(api.offer_create(**formdata))
 
     elif args['offer'] and args['geturl']:
-        print api.get_file_upload_url()
+        print(api.get_file_upload_url())
 
     elif args['offer'] and args['delete'] and args['--slug']:
-        print api.offer_delete(args['--slug'])
+        print(api.offer_delete(args['--slug']))
 
     elif args['offer'] and args['--slug']:
-        print api.offer_detail(args['--slug'])
+        print(api.offer_detail(args['--slug']))
 
     elif args['offer']:
-        print api.offer_list()
+        print(api.offer_list())
